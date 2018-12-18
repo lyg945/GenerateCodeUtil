@@ -3,6 +3,7 @@ package com.code.generate.service.impl;
 import com.code.generate.dao.SysGeneratorDao;
 import com.code.generate.service.SysGeneratorService;
 import com.code.generate.util.GeneratorUtils;
+import com.code.generate.util.PaatGeneratorUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,4 +61,20 @@ public class SysGeneratorServiceImpl implements SysGeneratorService {
         return outputStream.toByteArray();
     }
 
+    @Override
+    public byte[] generatorPaatCode(String[] tableNames) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ZipOutputStream zip = new ZipOutputStream(outputStream);
+
+        for (String tableName : tableNames) {
+            //查询表信息
+            Map<String, String> table = queryTable(tableName);
+            //查询列信息
+            List<Map<String, String>> columns = queryColumns(tableName);
+            //生成代码
+            PaatGeneratorUtils.generatorCode(table,columns,zip);
+        }
+        IOUtils.closeQuietly(zip);
+        return outputStream.toByteArray();
+    }
 }
