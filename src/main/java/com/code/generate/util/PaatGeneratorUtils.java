@@ -34,6 +34,9 @@ public class PaatGeneratorUtils {
         templates.add("templates/paat/ApiWrite.java.vm");
         templates.add("templates/paat/ServiceReadImpl.java.vm");
         templates.add("templates/paat/ServiceWriteImpl.java.vm");
+        templates.add("templates/paat/Controller.java.vm");
+        templates.add("templates/paat/Xml.java.vm");
+        templates.add("templates/paat/Xml2.java.vm");
         return templates;
     }
 
@@ -195,6 +198,14 @@ public class PaatGeneratorUtils {
 
         if (template.contains("Controller.java.vm")) {
             return packagePath + "controller" + File.separator + className + "Controller.java";
+        }
+
+        if (template.contains("Xml.java.vm")) {
+            return packagePath + "provider" + File.separator  + "mapper" + File.separator + className + "Mapper.xml";
+        }
+
+        if (template.contains("Xml2.java.vm")) {
+            return packagePath + "provider" + File.separator  + "mapper" + File.separator + className + "Mapper2.xml";
         }
 
         return null;
