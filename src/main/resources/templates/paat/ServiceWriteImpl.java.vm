@@ -1,0 +1,70 @@
+package ${package}.provider.service.impl;
+
+import javax.annotation.Resource;
+import com.alibaba.dubbo.config.annotation.Service;
+import com.jyb.common.util.service.BaseServiceImpl;
+import ${package}.api.model.${className};
+import ${package}.provider.dao.${className}Mapper;
+import ${package}.api.service.${className}WriteService;
+
+/**
+ * @author ${author}
+ * @Description: (${comments})
+ * @date ${datetime}
+ */
+@Service
+public class ${className}WriteServiceImpl extends BaseServiceImpl implements ${className}WriteService {
+
+	@Resource
+	private ${className}Mapper ${classNameLowercase}Mapper;
+
+	@Override
+	public int deleteByPrimaryKey(${pk.attrType} ${pk.attrname}) {
+		try {
+			return ${classNameLowercase}Mapper.deleteByPrimaryKey(${pk.attrname});
+		} catch (Exception e) {
+			logger.error("deleteByPrimaryKey  id=={}, error: {}" ,${pk.attrname}, e);
+		}
+		return 0;
+	}
+
+	@Override
+	public int insert(${className} ${classNameLowercase}) {
+		try {
+			return ${classNameLowercase}Mapper.insert(${classNameLowercase});
+		} catch (Exception e) {
+			logger.error("insert  ${classNameLowercase}=={}, error: {}" ,${classNameLowercase}, e);
+		}
+		return 0;
+	}
+
+	@Override
+	public int insertSelective(${className} ${classNameLowercase}) {
+		try {
+			return ${classNameLowercase}Mapper.insertSelective(${classNameLowercase});
+		} catch (Exception e) {
+			logger.error("insertSelective  ${classNameLowercase}=={}, error: {}" ,${classNameLowercase}, e);
+		}
+		return 0;
+	}
+	@Override
+	public int updateByPrimaryKeySelective(${className} ${classNameLowercase}) {
+		try {
+			return ${classNameLowercase}Mapper.updateByPrimaryKeySelective(${classNameLowercase});
+		} catch (Exception e) {
+			logger.error("updateByPrimaryKeySelective  ${classNameLowercase}=={}, error: {}" ,${classNameLowercase}, e);
+		}
+		return 0;
+	}
+
+	@Override
+	public int updateByPrimaryKey(${className} ${classNameLowercase}) {
+		try {
+			return ${classNameLowercase}Mapper.updateByPrimaryKey(${classNameLowercase});
+		} catch (Exception e) {
+			logger.error("updateByPrimaryKey  ${classNameLowercase}=={}, error: {}" ,${classNameLowercase}, e);
+		}
+		return 0;
+	}
+
+}

@@ -1,0 +1,48 @@
+package ${package}.provider.service.impl;
+
+import javax.annotation.Resource;
+import com.alibaba.dubbo.config.annotation.Service;
+import com.jyb.common.util.service.BaseServiceImpl;
+import java.util.List;
+import java.util.Map;
+import ${package}.api.model.${className};
+import ${package}.provider.dao.${className}Mapper;
+import ${package}.api.service.${className}ReadService;
+
+/**
+ * @author ${author}
+ * @Description: (${comments})
+ * @date ${datetime}
+ */
+@Service
+public class ${className}ReadServiceImpl extends BaseServiceImpl implements ${className}ReadService {
+
+	@Resource
+	private ${className}Mapper ${classNameLowercase}Mapper;
+
+	@Override
+	public ${className} selectByPrimaryKey(${pk.attrType} ${pk.attrname}) {
+		return ${classNameLowercase}Mapper.selectByPrimaryKey(${pk.attrname});
+	}
+
+	@Override
+	public Long select${className}Count(Map<String, Object> paraMap) {
+		try {
+			return ${classNameLowercase}Mapper.select${className}Count(paraMap);
+		} catch (Exception e) {
+			logger.error("select${className}Count  paraMap=={}, error: {}", paraMap, e);
+		}
+		return null;
+	}
+
+	@Override
+	public List<${className}> select${className}List(Map<String, Object> paraMap) {
+		try {
+			return ${classNameLowercase}Mapper.select${className}List(paraMap);
+		} catch (Exception e) {
+			logger.error("select${className}List  paraMap=={}, error: {}", paraMap, e);
+		}
+		return null;
+	}
+
+}

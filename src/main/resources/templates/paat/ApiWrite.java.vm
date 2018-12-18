@@ -1,0 +1,21 @@
+package ${package}.api.service;
+
+import ${package}.api.model.${className};
+
+/**
+ * @author ${author}
+ * @Description: (${comments})
+ * @date ${datetime}
+ */
+public interface ${className}WriteService {
+
+    int insert(${className} ${classname});
+
+    int insertSelective(${className} ${classname});
+
+    int deleteByPrimaryKey(${pk.attrType} ${pk.attrname});
+
+    int updateByPrimaryKeySelective(${className} ${classname});
+
+    int updateByPrimaryKey(${className} ${classname});
+}

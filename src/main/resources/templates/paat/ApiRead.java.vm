@@ -1,4 +1,4 @@
-package ${package}.provider.dao;
+package ${package}.api.service;
 
 import java.util.List;
 import java.util.Map;
@@ -9,17 +9,7 @@ import ${package}.api.model.${className};
  * @Description: (${comments})
  * @date ${datetime}
  */
-public interface ${className}Mapper {
-
-    int insert(${className} ${classname});
-
-    int insertSelective(${className} ${classname});
-
-    int deleteByPrimaryKey(${pk.attrType} ${pk.attrname});
-
-    int updateByPrimaryKeySelective(${className} ${classname});
-
-    int updateByPrimaryKey(${className} ${classname});
+public interface ${className}ReadService {
 
     /**
     *  根据主键查询单个
@@ -39,4 +29,5 @@ public interface ${className}Mapper {
      * @return
      */
     List<${className}> select${className}List(Map<String, Object> paraMap);
+
 }

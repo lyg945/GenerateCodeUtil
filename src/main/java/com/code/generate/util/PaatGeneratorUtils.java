@@ -30,10 +30,10 @@ public class PaatGeneratorUtils {
         List<String> templates = new ArrayList<String>();
         templates.add("templates/paat/Entity.java.vm");
         templates.add("templates/paat/Dao.java.vm");
-        templates.add("templates/paat/Service.java.vm");
-        templates.add("templates/paat/ServiceImpl.java.vm");
-        templates.add("templates/paat/Controller.java.vm");
-        templates.add("templates/paat/Provider.java.vm");
+        templates.add("templates/paat/ApiRead.java.vm");
+        templates.add("templates/paat/ApiWrite.java.vm");
+        templates.add("templates/paat/ServiceReadImpl.java.vm");
+        templates.add("templates/paat/ServiceWriteImpl.java.vm");
         return templates;
     }
 
@@ -172,21 +172,25 @@ public class PaatGeneratorUtils {
         }
 
         if (template.contains("Entity.java.vm")) {
-            return packagePath + "entity" + File.separator + className + ".java";
+            return packagePath + "api" + File.separator  + "model" + File.separator + className + ".java";
         }
 
         if (template.contains("Dao.java.vm")) {
-            return packagePath + "dao" + File.separator + className + "Dao.java";
+            return packagePath + "provider" + File.separator  + "dao" + File.separator + className + "Mapper.java";
         }
-        if (template.contains("Provider.java.vm")) {
-            return packagePath + "dao" + File.separator + "provider" + File.separator + className + "Provider.java";
+        if (template.contains("ApiRead.java.vm")) {
+            return packagePath + "api" + File.separator  + "service" + File.separator + className + "ReadService.java";
         }
-        if (template.contains("Service.java.vm")) {
-            return packagePath + "service" + File.separator + className + "Service.java";
+        if (template.contains("ApiWrite.java.vm")) {
+            return packagePath + "api" + File.separator + "service" + File.separator + className + "WriteService.java";
         }
 
-        if (template.contains("ServiceImpl.java.vm")) {
-            return packagePath + "service" + File.separator + "impl" + File.separator + className + "ServiceImpl.java";
+        if (template.contains("ServiceReadImpl.java.vm")) {
+            return packagePath + "provider" + File.separator  + "service" + File.separator + "impl" + File.separator + className + "ServiceReadImpl.java";
+        }
+
+        if (template.contains("ServiceWriteImpl.java.vm")) {
+            return packagePath + "provider" + File.separator  + "service" + File.separator + "impl" + File.separator + className + "ServiceWriteImpl.java";
         }
 
         if (template.contains("Controller.java.vm")) {
