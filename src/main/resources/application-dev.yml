@@ -4,7 +4,8 @@ spring:
         url: jdbc:mysql://172.16.5.133:3306/jyb_cms?allowMultiQueries=true&useUnicode=true
         driverClassName: com.mysql.jdbc.Driver
         druid:
-            url: jdbc:mysql://172.16.5.133:3306/jyb_cms?allowMultiQueries=true&useUnicode=true
+#            url: jdbc:mysql://172.16.5.133:3306/jyb_cms?allowMultiQueries=true&useUnicode=true
+            url: jdbc:mysql://172.16.5.133:3306/jyb_epm?allowMultiQueries=true&useUnicode=true
             username: root
             password: P@ssw0rd
             initial-size: 10

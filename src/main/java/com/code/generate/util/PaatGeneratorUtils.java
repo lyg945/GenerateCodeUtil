@@ -34,7 +34,7 @@ public class PaatGeneratorUtils {
         templates.add("templates/paat/ApiWrite.java.vm");
         templates.add("templates/paat/ServiceReadImpl.java.vm");
         templates.add("templates/paat/ServiceWriteImpl.java.vm");
-        templates.add("templates/paat/Controller.java.vm");
+//        templates.add("templates/paat/Controller.java.vm");
         templates.add("templates/paat/Xml.java.vm");
         templates.add("templates/paat/Xml2.java.vm");
         return templates;
@@ -47,7 +47,6 @@ public class PaatGeneratorUtils {
                                      List<Map<String, String>> columns, ZipOutputStream zip) {
         //配置信息
         Configuration config = getConfig();
-
         //表信息
         SysTable sysTable = new SysTable();
         sysTable.setTableName(table.get("tableName"));
@@ -74,6 +73,9 @@ public class PaatGeneratorUtils {
             //列的数据类型，转换成Java类型
             String attrType = config.getString(sysColumn.getDataType(), "unknowType");
             sysColumn.setAttrType(attrType);
+
+            //设置mybatis数据类型
+            sysColumn.setMyBatisType(javaToMybatis(attrType));
 
             //是否主键
             if ("PRI".equalsIgnoreCase(column.get("columnKey")) && sysTable.getPk() == null) {
@@ -144,6 +146,32 @@ public class PaatGeneratorUtils {
         return WordUtils.capitalizeFully(columnName, new char[]{'_'}).replace("_", "");
     }
 
+    public static String javaToMybatis(String columnName) {
+        if("char".equals(columnName)){
+            return "VARCHAR";
+        }
+        switch (columnName){
+            case "Boolean":
+                return "BOOLEAN";
+            case "Integer":
+                return "INTEGER";
+//            case "Long":
+//                return "BIGINT";
+//            case "Long":
+//                return "BIGINT";
+//            case "Long":
+//                return "BIGINT";
+//            case "Long":
+//                return "BIGINT";
+//            case "Long":
+//                return "BIGINT";
+//            case "Long":
+//                return "BIGINT";
+
+        }
+        return null;
+    }
+
     /**
      * 表名转换成Java类名
      */
@@ -189,11 +217,11 @@ public class PaatGeneratorUtils {
         }
 
         if (template.contains("ServiceReadImpl.java.vm")) {
-            return packagePath + "provider" + File.separator  + "service" + File.separator + "impl" + File.separator + className + "ServiceReadImpl.java";
+            return packagePath + "provider" + File.separator  + "service" + File.separator + "impl" + File.separator + className + "ReadServiceImpl.java";
         }
 
         if (template.contains("ServiceWriteImpl.java.vm")) {
-            return packagePath + "provider" + File.separator  + "service" + File.separator + "impl" + File.separator + className + "ServiceWriteImpl.java";
+            return packagePath + "provider" + File.separator  + "service" + File.separator + "impl" + File.separator + className + "WriteServiceImpl.java";
         }
 
         if (template.contains("Controller.java.vm")) {

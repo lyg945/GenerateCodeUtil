@@ -38,7 +38,8 @@ public class UtilApplicationTests {
 	public void generatePaatTables()throws IOException {
 		List<Map<String, Object>> maps = sysGeneratorService.queryList(new HashMap<>());
 		List<String> tableName = maps.stream().map(e -> (String)e.get("tableName")).collect(Collectors.toList());
-		byte[] bytes = sysGeneratorService.generatorPaatCode(tableName.toArray(new String[]{}));
+//		byte[] bytes = sysGeneratorService.generatorPaatCode(tableName.toArray(new String[]{}));
+		byte[] bytes = sysGeneratorService.generatorPaatCode(new String[]{"epm_article_info","epm_article_expand"});
 		File file = new File("d:/test.zip");
 		FileOutputStream fileOutputStream = new FileOutputStream(file);
 		fileOutputStream.write(bytes);

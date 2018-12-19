@@ -19,6 +19,8 @@ public class SysColumn {
     private String attrname;
     //属性类型
     private String attrType;
+    //属性类型
+    private String myBatisType;
     //auto_increment
     private String extra;
 
@@ -77,5 +79,11 @@ public class SysColumn {
     public void setExtra(String extra) {
         this.extra = extra;
     }
+    public String getMyBatisType() {
+        return myBatisType;
+    }
 
+    public void setMyBatisType(String myBatisType) {
+        this.myBatisType = myBatisType;
+    }
 }

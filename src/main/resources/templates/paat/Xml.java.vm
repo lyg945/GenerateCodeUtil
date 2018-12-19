@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="${package}.provider.dao.${className}Mapper">
+        <resultMap id="BaseResultMap" type="${package}.api.model.${className}" >
+#foreach ($column in $columns)
+            <result column="$column.columnName" property="$column.attrname"  />
+#end
+        </resultMap>
+
+        <sql id="Base_Column_List" >
+#foreach ($column in $columns)
+            $column.columnName,
+#end
+        </sql>
+
+        <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.${pk.attrType}" >
+                select
+                <include refid="Base_Column_List" />
+                from ${tableName}
+                where ${pk.columnName} = #{${pk.attrname},jdbcType=${pk.attrType}}
+        </select>
+
+        <delete id="deleteByPrimaryKey" parameterType="java.lang.${pk.attrType}" >
+                delete from ${tableName}
+                where ${pk.columnName} = #{${pk.attrname},jdbcType=${pk.attrType}}
+        </delete>
+
+        <insert id="insert" parameterType="${package}.api.model.${className}" >
+                insert into ${tableName} (
+#foreach ($column in $columns)
+                    $column.columnName,
+#end
+                )
+                values (
+#foreach ($column in $columns)
+                    #{$column.attrname},
+#end
+                )
+                <selectKey keyProperty="${pk.attrname}" resultType="java.lang.${pk.attrType}" order="AFTER">
+                        SELECT LAST_INSERT_ID()
+                </selectKey>
+        </insert>
+
+        <insert id="insertSelective" parameterType="${package}.api.model.${className}" >
+                insert into ${tableName}
+                    <trim prefix="(" suffix=")" suffixOverrides="," >
+#foreach ($column in $columns)
+                        <if test="$column.attrname != null" >
+                            $column.columnName,
+                        </if>
+#end
+                    </trim>
+                    <trim prefix="values (" suffix=")" suffixOverrides="," >
+#foreach ($column in $columns)
+                        <if test="$column.attrname != null" >
+                            #{$column.columnName,jdbcType=INTEGER},
+                        </if>
+#end
+                    </trim>
+                    <selectKey keyProperty="${pk.attrname}" resultType="java.lang.${pk.attrType}" order="AFTER">
+                            SELECT LAST_INSERT_ID()
+                    </selectKey>
+        </insert>
+
+        <update id="updateByPrimaryKeySelective" parameterType="${package}.api.model.${className}" >
+                update ${tableName}
+                    <set>
+#foreach ($column in $columns)
+                        <if test="$column.attrname != null" >
+                            $column.columnName = #{$column.attrname}
+                        </if>
+#end
+                    </set>
+                        where ${pk.columnName} = #{${pk.attrname},jdbcType=INTEGER}
+        </update>
+
+        <update id="updateByPrimaryKey" parameterType="${package}.api.model.${className}" >
+                update ${tableName}
+                set
+#foreach ($column in $columns)
+                  $column.columnName = #{$column.attrname},
+#end
+                where ${pk.columnName} = #{${pk.attrname}}
+        </update>
+
+        <select id="selectMenuFieldMappingCount" resultType="java.lang.Long" parameterType="java.util.Map" >
+                select count(*)
+                from ${tableName}
+                where 1=1
+        <include refid="condition"></include>
+        </select>
+
+        <select id="selectMenuFieldMappingList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+                select
+                <include refid="Base_Column_List" />
+                from ${tableName}
+                where 1=1
+                <include refid="condition"></include>
+                <if test="startRecordNumb!=null and pageSize!=null">
+                    limit #{startRecordNumb,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+                </if>
+        </select>
+
+        <sql id="condition">
+        </sql>
+</mapper>
