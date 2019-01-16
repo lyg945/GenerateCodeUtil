@@ -7,13 +7,13 @@ server:
     port: 9025
 
 spring:
-    # »·¾³ dev|test|pub
+    # ç¯å¢ƒ dev|test|pub
     profiles:
         active: dev
     datasource:
         type: com.alibaba.druid.pool.DruidDataSource
         driverClassName: com.mysql.jdbc.Driver
-    # jacksonÊ±¼ä¸ñÊ½»¯
+    # jacksonæ—¶é—´æ ¼å¼åŒ–
     jackson:
         time-zone: GMT+8
         date-format: yyyy-MM-dd HH:mm:ss
@@ -22,12 +22,12 @@ spring:
             max-file-size: 100MB
             max-request-size: 100MB
             enabled: true
-    # Ö¸¶¨¾²Ì¬×ÊÔ´µÄÂ·¾¶
+    # æŒ‡å®šé™æ€èµ„æºçš„è·¯å¾„
     resources:
         static-locations: classpath:/static/,classpath:/views/,classpath:/templates/,classpath:/api/dist/
 
-# MybatisÅäÖÃ
+# Mybatisé…ç½®
 mybatis:
     mapperLocations: classpath:mapper/*.xml
     configuration:
-         mapUnderscoreToCamelCase: true  # ÍÕ·å×ª»»
+        mapUnderscoreToCamelCase: true  # é©¼å³°è½¬æ¢

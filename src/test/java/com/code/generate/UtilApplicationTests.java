@@ -39,7 +39,14 @@ public class UtilApplicationTests {
 		List<Map<String, Object>> maps = sysGeneratorService.queryList(new HashMap<>());
 		List<String> tableName = maps.stream().map(e -> (String)e.get("tableName")).collect(Collectors.toList());
 //		byte[] bytes = sysGeneratorService.generatorPaatCode(tableName.toArray(new String[]{}));
-		byte[] bytes = sysGeneratorService.generatorPaatCode(new String[]{"epm_article_info","epm_article_expand"});
+		byte[] bytes = sysGeneratorService.generatorPaatCode(new String[]{
+//				"business_project","business_project_field",
+//				"business_project_form","epm_manager",
+//				"epm_manager_field","institution_leader",
+//				"institution_leader_field","institution_customer_source",
+				"project_focus"
+
+		});
 		File file = new File("d:/test.zip");
 		FileOutputStream fileOutputStream = new FileOutputStream(file);
 		fileOutputStream.write(bytes);

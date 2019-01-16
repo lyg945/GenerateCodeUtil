@@ -116,6 +116,12 @@ public class PaatGeneratorUtils {
         map.put("package", config.getString("package"));
         map.put("author", config.getString("author"));
         map.put("datetime", DateUtils.format(new Date(), DateUtils.DATE_TIME_PATTERN));
+        String baseService ="com.jyb.common.util.service.BaseServiceImpl";
+        if(config.getString("package").indexOf("jsb") > 0){
+            baseService = baseService.replace("jyb","jsb");
+        }
+        map.put("baseService", baseService);
+
         VelocityContext context = new VelocityContext(map);
 
         //获取模板列表
